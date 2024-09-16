@@ -1,9 +1,7 @@
-
-
 #include <iostream>
 #include <cstdlib> 
 #include <ctime>    
-
+//Task 10
 const int N = 5;  
 
 int main() {
