@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-
+//Task 10
 int main() {
     double a = 2, b = 3, c = 7;
     double hx = 0.31;
