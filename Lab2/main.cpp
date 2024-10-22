@@ -5,8 +5,14 @@
 const int N = 5;  
 
 int main() {
-    int matrix[N][N];
+
+    int** matrix = new int*[N];
+
     int sumEven = 0;
+
+   for (int i = 0; i < N; i++) {
+        *(matrix+i) = new int[N];
+        }
 
     srand(time(0));
     std::cout << "Original Matrix:\n";
@@ -40,6 +46,10 @@ int main() {
             std::cout << std::endl;
         }
     }
+    
+    for (int i = 0; i < N; i++) {
+        delete [] matrix[i];
+        }
 
     return 0;
 }

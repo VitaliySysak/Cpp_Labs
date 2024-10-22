@@ -5,50 +5,42 @@
 */
 
 #include <iostream>
-#include <string>
-using namespace std;
-
-const int n = 5;  
 
 struct Department {
-    string name;       
-    int employees;     
-    int foundationYear; 
-};
-
-Department departments[n] = { 
-    {"Development", 20, 1995},  
-    {"Support", 50, 2005},      
-    {"HR", 30, 1990},             
-    {"Marketing", 15, 2010},     
-    {"Sales", 25, 2000}           
+    std::string name;   
+    int employees;      
+    int yearFounded;   
 };
 
 
-
-int main() {
-    cout << "Original department:\n";
-    for (int i = 0; i < n; i++) {
-        cout << departments[i].name << "\t"
-             << departments[i].employees << "\t"
-             << departments[i].foundationYear << endl;
-    }
-
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (departments[j].foundationYear > departments[j + 1].foundationYear) {
+void sortDepartmentsByYear(Department departments[], int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (departments[j].yearFounded > departments[j + 1].yearFounded) {
                 Department temp = departments[j];
                 departments[j] = departments[j + 1];
                 departments[j + 1] = temp;
             }
         }
     }
+}
 
-    cout << "\nSorted by foundation year:\n";
-    for (int i = 0; i < n; i++) {
-        cout << departments[i].name << "\t"
-             << departments[i].employees << "\t"
-             << departments[i].foundationYear << endl;
+int main() {
+    Department departments[4] = {
+        {"Developer", 15, 1990},
+        {"Designer", 50, 2005},
+        {"BA", 20, 1985},
+        {"PM", 30, 2010}
+    };
+
+    int size = 4;
+
+    sortDepartmentsByYear(departments, size);
+    std::cout << "Departments sorted by year of foundation:\n";
+    for (int i = 0; i < size; i++) {
+        std::cout << "Name: " << departments[i].name
+                  << ", Number of employees: " << departments[i].employees
+                  << ", Year of foundation: " << departments[i].yearFounded << "\n";
     }
 
     return 0;

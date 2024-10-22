@@ -4,41 +4,38 @@
 */
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>  
 using namespace std;
 
-int* createMatr(int n) {
-    if (n < 1) return NULL;
-    int* matr = new int[n];
-    return matr;
+int* createArray(int size) {
+    return new int[size]; 
 }
 
-void deleteMatr(int*& matr) {
-    delete[] matr;
-    matr = NULL;
-}
-
-void randMatr(int* matr, int n) {
+void fillArray(int* arr, int size) {
     srand(time(0));
-    for (int i = 0; i < n; i++)
-        *(matr + i) = rand() % 11;
+    for (int i = 0; i < size; i++) {
+        arr[i] = rand() % 11; 
+    }
 }
 
-void vividMatr(int* matr, int n) {
-    for (int i = 0; i < n; i++, cout << "\t")
-        cout << *(matr + i);
+void printArray(int* arr, int size) {
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
     cout << endl;
 }
 
-void sortMatr(int* matr, int n, bool ascending) {
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
+void sortArray(int* arr, int size, bool ascending) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
             if (ascending) {
-                if (*(matr + j) > *(matr + j + 1)) {
-                    swap(*(matr + j), *(matr + j + 1));
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr[j], arr[j + 1]);
                 }
             } else {
-                if (*(matr + j) < *(matr + j + 1)) {
-                    swap(*(matr + j), *(matr + j + 1));
+                if (arr[j] < arr[j + 1]) {
+                    swap(arr[j], arr[j + 1]);
                 }
             }
         }
@@ -46,22 +43,23 @@ void sortMatr(int* matr, int n, bool ascending) {
 }
 
 int main() {
-    int n = 5;
-    int* arr = createMatr(n);
-    randMatr(arr, n);
+    int size = 5;
+    int* arr = createArray(size);
     
-    cout << "Original array:" << endl;
-    vividMatr(arr, n);
+    fillArray(arr, size);
     
-    sortMatr(arr, n, true);
-    cout << "Sorted array ascending:" << endl;
-    vividMatr(arr, n);
+    cout << "Original array:" << "\n";
+    printArray(arr, size);
     
-    sortMatr(arr, n, false);
-    cout << "Sorted array descending:" << endl;
-    vividMatr(arr, n);
+    sortArray(arr, size, true); 
+    cout << "Array ascending order:" << "\n";
+    printArray(arr, size);
     
-    deleteMatr(arr);
+    sortArray(arr, size, false); 
+    cout << "Array descending order:" << "\n";
+    printArray(arr, size);
+    
+    delete[] arr; 
     
     return 0;
 }
